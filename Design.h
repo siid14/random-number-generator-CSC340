@@ -2,8 +2,8 @@
  * 
  * Given a set of students, S, and a set of groups, G, with 0 to 5 students NOT belonging to S,
  * assigned to each group, randomly assign the students belonging to S to the groups belonging to G so
- * that every student belongs to a group and no group has more than 5 members, and return a list of
- * student in set S and which group they have been assigned to.
+ * that every student belongs to a group and no group has less than 3 or more than 5 members, and 
+ * return a list of students in set S and which group they have been assigned to.
  */
 
 /* Data
