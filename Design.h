@@ -11,13 +11,16 @@
  * Students (S)
  *  Fields: • identifier (some integer number from 0 to n, where n is the number of students - 1)
  *          • class section identifier (11 AM or 12 PM)
- *  Structure: array, vector, or similar
+ *          • group identifier
+ *  Structure: array, vector, or similar (It is also possible to seperate S into subsets S1 and S2 so
+ *          that each subset only holds students belonging to a particular class section.)
  *
  * Groups (G)
  *  Fields: • identifier (some integer number from 0 to n, where n is the number of groups - 1)
  *          • class section identifier (11 AM for 12 PM)
  *          • number of members assigned to a particular group
- *  Structure: list of key, value pairs (map)
+ *  Structure: list of key, value pairs (map) (G may also need to be divided into subsets G1 and G2 by
+ *          class section.)
  */
 
 /* Algorithm
