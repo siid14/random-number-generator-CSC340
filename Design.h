@@ -24,29 +24,9 @@
  */
 
 /* Algorithm
+ * S = current set of students
+ * G = current set of groups
  *
- * • Let s be a student from S so that S = {s0, s1, s2, ..., sn}
- * • Let g be a group from G so that G = {g0, g1, g2, ..., gn}
- *
- * Approach 1:
- * 1) Draw a random number i from the range 0 to |S|
- * • Let j be the identifier of the current group (j is initially 0)
- * 2) If gj (first group) has less than 5 members:
- *    2a) Assign si to gj
- *    2b) Remove si from S
- * 3) Else increment j and and return to step 2
- * 4) Return to step 1 until |S| = 0 (All students have been added to a group)
- *
- * Approach 2:
- * 1) Draw a random number i from the range 0 to |S|
- * 2) Draw a random number j from the range 0 to |G|
- * 3) If gj has less than 5 members:
- *    3a) Assign si to gj
- *    3b) Remove si from S 
- * 4) Else return to step 2
- * 5) Return to step 1 until |S| = 0 (All students have been added to a group)
- *
- * Approach 3:
  * 1) Draw a random number j from the range 0 to |G|
  * • Let i be the ientifier of the current student (i is initially 0)
  * 2) If gj has less than 5 members:
@@ -54,10 +34,18 @@
  *    2b) Increment i
  * 3) Else do nothing
  * 4) Return to step 1 while i is less than |S|
+ *
  */
 
-/* Declarations
+/* Declarations/Prototypes
  *
+ * Struct Student:
+ *  int id
+ *  int group 
+ *
+ * Takes a set of students (s) and a set of groups (g) and assigns each student to a group, ensuring
+ * that no group has less than 3 or more than 5 students.
+ * std::vector<Student> AssignStudents(std::vector<Student> s, unordered_map<int, int> g)
  */
 
 /* Unit Tests
