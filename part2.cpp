@@ -30,21 +30,50 @@ std::vector<Student> AssignStudents(std::vector<Student> &s, std::unordered_map<
       g[rand_num]++;            // Increment the number of students in group rand_num
       i++;                      // Move onto next student
     }
-    // Else produce another rand_num and try again
+    // else produce another rand_num and try again
   }
 
-  // Assign remaining students to groups with less than 5 members
+  // Reassign students from groups with less than 3 members
+  for (int i = 0; i < g.size(); i++)
+  {
+    if (g[i] < 3) // check if group has less than 3 members
+    {
+      for (int j = 0; j < s.size(); j++)
+      {
+        if (s.at(j).group == i) // check if student is in group i
+        {
+          g[i]--;                  // decrement number of students in group i
+          s.at(j).group = -1;      // unassign student j from group i
+          rand_num = distrib(gen); // produce new rand_num
+
+          while (g[rand_num] >= 5) // keep producing rand_num until group with less than 5 members is found
+          {
+            rand_num = distrib(gen);
+          }
+
+          s.at(j).group = rand_num; // assign student j to new group
+          g[rand_num]++;            // increment the number of students in new group
+          if (g[i] >= 3)            // check if group i now has at least 3 members
+          {
+            break; // move onto next group
+          }
+        }
+      }
+    }
+  }
+
+  // assign remaining unassigned students to groups with less than 5 members
   for (int i = 0; i < s.size(); i++)
   {
-    if (s.at(i).group == -1) // Check if student is unassigned
+    if (s.at(i).group == -1) // check if student is unassigned
     {
       for (int j = 0; j < g.size(); j++)
       {
-        if (g[j] < 5) // Check if group has less than 5 members
+        if (g[j] < 5) // check if group has less than 5 members
         {
-          s.at(i).group = j; // Assign student to group j
-          g[j]++;            // Increment number of students in group j
-          break;             // Move onto next unassigned student
+          s.at(i).group = j; // assign student to group j
+          g[j]++;            // increment number of students in group j
+          break;             // move onto next unassigned student
         }
       }
     }
