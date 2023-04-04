@@ -75,7 +75,7 @@ void Test_AssignStudents2() { // Test students < available spots
 
   for (const auto& student : test_list) {
     if (student.group < 0) {
-      std::cout << "TEST 1 FAILED: student " << student.id << " not " <<
+      std::cout << "TEST 2 FAILED: student " << student.id << " not " <<
       "assigned to a group\n";
 
       return;
@@ -84,19 +84,19 @@ void Test_AssignStudents2() { // Test students < available spots
 
   for (const auto& [key, value] : test_map) {
     if (value > 5) {
-      std::cout << "TEST 1 FAILED: group " << key << " has " << value <<
+      std::cout << "TEST 2 FAILED: group " << key << " has " << value <<
       " students\n";
 
       return;
     }
 
     if (value < 0 && value < 3) {
-      std::cout << "TEST 1 FAILED: group " << key << " has " << value <<
+      std::cout << "TEST 2 FAILED: group " << key << " has " << value <<
       "students\n";
 
       return;
     }
   }
 
-  std::cout << "TEST 1 PASSED\n";
+  std::cout << "TEST 2 PASSED\n";
 }
