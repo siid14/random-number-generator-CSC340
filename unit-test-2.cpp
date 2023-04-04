@@ -5,8 +5,8 @@ void Test_AssignStudents1(); // Test students <= available spots
 void Test_AssignStudents2(); // Test students > available spots
 
 int main() {
-  void Test_AssignStudents1();
-  void Test_AssignStudents2();
+  Test_AssignStudents1();
+  Test_AssignStudents2();
 
   return 0;
 }
