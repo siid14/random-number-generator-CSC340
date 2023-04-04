@@ -34,25 +34,51 @@ std::map<int, int> generateHistogram(int mean, int standard_deviation, int numbe
     // create vector to store the randomly generated samples
     std::map<int, int> histogram; // key : possible value of sample -- value : number of times it occurs
 
-    // generate the sample number and store it in histogram
+    // * generate the sample number and store it in histogram
     for (int i = 0; i < number_samples; i++)
     {
         // rounds the random number to the nearest integer and increments the value in the map
         histogram[std::round(d(gen))]++;
     }
 
-    // count the occurence the each histogram value and print the histogram
-    for (auto [x, y] : histogram)
+    cout << "PRINTING ACTUAL HISTOGRAM REPRESENTATION"
+         << "\n";
+
+    // ! Structured bindings method, compiler need to be set with C++17 for use (warning)
+    // for (auto [x, y] : histogram)
+    // {
+
+    //     cout << std::setw(2) << x << " | " << std::string(y / 100, '-') << "\n";
+    // }
+
+    // count the occurence the each histogram value and print the histogram represention
+    for (const auto &pair : histogram)
     {
+        const int x = pair.first;
+        const int y = pair.second;
         cout << std::setw(2) << x << " | " << std::string(y / 100, '-') << "\n";
     }
+
+    cout << "END PRINTING ACTUAL HISTOGRAM REPRESENTATION"
+         << "\n";
+
+    cout << "PRINTING ACTUAL HISTOGRAM KEY - VALUE"
+         << "\n";
+    // print key-value pair of historgram
+    for (const auto &pair : histogram)
+    {
+        std::cout << pair.first << " : " << pair.second << std::endl;
+    }
+    cout << "END PRINTING ACTUAL HISTOGRAM KEY - VALUE"
+         << "\n";
+
     return histogram;
     cout << "\n";
 }
 
 int main()
 {
-    // * Part 1
+    // * PART 1
     int mean, standard_deviation;
 
     // * get mean and standard deviation
@@ -61,64 +87,49 @@ int main()
     cout << "Enter Standard Deviation: ";
     cin >> standard_deviation;
 
-    // * print an histogram of numbers
+    //  print an histogram of numbers
     // generateHistogram(50.0, 10.0, 20000);
     // generateHistogram(10, 2, 20000);
     // generateHistogram(mean, standard_deviation, 20000);
 
-    // * Unit Test - Part 1
-    std::map<int, int> expectedOutput = {
-        {2, 0},
-        {3, 0},
-        {4, 0},
-        {5, 1},
-        {6, 5},
-        {7, 13},
-        {8, 22},
-        {9, 28},
-        {10, 31},
-        {11, 28},
-        {12, 20},
-        {13, 10},
-        {14, 4},
-        {15, 1},
-        {16, 0},
-        {17, 0},
-        {18, 0}};
+    // * Unit Test - PART 1
 
-    std::map<int, int> actualOutput = generateHistogram(mean, standard_deviation, 20000);
+    // * TEST WITH INPUT Median : 10 - Standard Deviation : 2
+    std::map<int, int> expectedOutput = {
+        {2, 2},
+        {3, 10},
+        {4, 46},
+        {5, 167},
+        {6, 564},
+        {7, 1371},
+        {8, 2335},
+        {9, 3499},
+        {10, 4027},
+        {11, 3426},
+        {12, 2408},
+        {13, 1350},
+        {14, 564},
+        {15, 172},
+        {16, 46},
+        {17, 11},
+        {18, 2}};
+
+    std::map<int, int> actualOutput = generateHistogram(mean, standard_deviation, 20000); /* return a histogram of Key-Value pair
+                                                                                            Key-Value --> Number - Number of time the same number appear*/
 
     cout << "PRINTING EXPECTED HISTOGRAM"
          << "\n";
-    for (auto [x, y] : expectedOutput)
+    for (const auto &pair : expectedOutput)
     {
+        const int x = pair.first;
+        const int y = pair.second;
         cout << std::setw(2) << x << " | " << std::string(y / 100, '-') << "\n";
     }
     cout << "END PRINTING EXPECTED HISTOGRAM"
          << "\n";
 
-    // cout << "PRINTING ACTUAL HISTOGRAM"
-    //      << "\n";
-    // for (auto [x, y] : actualOutput)
-    // {
-    //     cout << std::setw(2) << x << " | " << std::string(y / 100, '-') << "\n";
-    // }
-    // cout << "END PRINTING ACTUAL HISTOGRAM"
-    //      << "\n";
-
-    // compare actual and expected outputs
-    // if (actualOutput == expectedOutput)
-    // {
-    //     std::cout << "Test passed!" << std::endl;
-    // }
-    // else
-    // {
-    //     std::cout << "Test failed!" << std::endl;
-    // }
-
     cout << "PRINTING EXPECTED HISTOGRAM KEY - VALUE"
          << "\n";
-    // Iterate over the key-value pairs in the map
     for (const auto &pair : expectedOutput)
     {
         std::cout << pair.first << " : " << pair.second << std::endl;
@@ -126,19 +137,31 @@ int main()
     cout << "END PRINTING EXPECTED HISTOGRAM KEY - VALUE"
          << "\n";
 
-    cout << "PRINTING ACTUAL HISTOGRAM KEY - VALUE"
-         << "\n";
-    for (const auto &pair : actualOutput)
+    // * compare actual and expected outputs
+    if (actualOutput == expectedOutput)
     {
-        std::cout << pair.first << " : " << pair.second << std::endl;
+        std::cout << "Test passed!" << std::endl;
     }
-    cout << "END PRINTING ACTUAL HISTOGRAM KEY - VALUE"
+    else
+    {
+        std::cout << "Test failed!" << std::endl;
+    }
+
+    // cout << "PRINTING ACTUAL HISTOGRAM KEY - VALUE"
+    //      << "\n";
+    // for (const auto &pair : actualOutput)
+    // {
+    //     std::cout << pair.first << " : " << pair.second << std::endl;
+    // }
+    // cout << "END PRINTING ACTUAL HISTOGRAM KEY - VALUE"
+    //      << "\n";
+
+    // * compare actual and expected outputs
+    assert(actualOutput == expectedOutput);
+    cout << "Test passed via assert method"
          << "\n";
 
-    // compare actual and expected outputs
-    assert(actualOutput == expectedOutput);
-
-    // TODO : Part 2
+    // TODO: Unit Test: Part 2
 
     return 0;
 }
